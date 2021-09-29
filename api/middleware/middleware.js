@@ -1,4 +1,5 @@
 const Users = require("../users/users-model")
+const Post = require("../posts/posts-model");
 
 function logger(req, res, next) {
 	console.log(`${req.method} ${req.path} ${Date.now()}`);

@@ -1,7 +1,7 @@
 const express = require('express');
 const {
 	validateUserId,
-	// validateUser,
+	validateUser,
 	validatePost,
 } = require("../middleware/middleware.js");
 const Users = require('./users-model')
