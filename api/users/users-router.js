@@ -40,12 +40,13 @@ router.post("/", validateUser, (req, res, next) => {
   })
 
 router.put("/:id", validateUserId, validateUser, (req, res, next) => {
-	User.update(req.params.id, { name: req.name })
+  const changes = req.body
+	User.update(req.params.id, changes,{ name: req.name })
   .then(() => {
-    return User.getById(req.params.id)
+    return User.getById(req.params.id, changes)
   })
   .then(user => {
-    res.json(user)
+    res.status(200).json(user)
   })
   .catch(next)
 });

@@ -22,19 +22,16 @@ const validateUserId = async (req, res, next) => {
 
 function validateUser(req, res, next) {
 	// DO YOUR MAGIC
-	try {
-		const user = req.body;
-		if (!user.name) {
-			res.status(400).json({ message: "missing required name field" });
-		} else {
-			next();
-		}
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({
-			message: error.message,
+	const { name } = req.body
+	if (!name || !name.trim()) {
+		//.trim() if white space is submitted
+		res.status(400).json({
+			message: "missing required name field",
 		});
+	} else {
+		req.name = name.trim();
 	}
+  next()
 }
 
 function validatePost(req, res, next) {
