@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express')
 const {
 	validateUserId,
 	validateUser,
@@ -8,10 +8,7 @@ const {
 const User = require('./users-model')
 const Posts = require("../posts/posts-model")
 
-// You will need `users-model.js` and `posts-model.js` both
-// The middleware functions also need to be required
-
-const router = express.Router();
+const router = express.Router()
 
 router.get("/", (req, res) => {
   User.get(req.query)
@@ -19,7 +16,7 @@ router.get("/", (req, res) => {
 			res.status(200).json(user);
 		})
 		.catch((err) => {
-			res.status(500).json({ message: err.message });
+			res.status(500).json({ message: err.message })
 		});
 })
 
@@ -49,7 +46,7 @@ router.put("/:id", validateUserId, validateUser, (req, res, next) => {
     res.status(200).json(user)
   })
   .catch(next)
-});
+})
 
 router.delete("/:id", validateUserId, async (req, res, next) => {
 	try {
@@ -63,11 +60,11 @@ router.delete("/:id", validateUserId, async (req, res, next) => {
 router.get("/:id/posts", validateUserId, async (req, res, next) => {
 		try {
 			const result = await User.getUserPosts(req.params.id)
-			res.json(result);
+			res.json(result)
 		} catch (err) {
-			next(err);
+			next(err)
 		}
-});
+})
 
 router.post("/:id/posts", validateUserId, validatePost, async (req, res, next) => {
 try {
@@ -88,6 +85,4 @@ router.use((err, req, res, next) => {
     stack: err.stack,
   })
 })
-
-// do not forget to export the router
 module.exports = router
