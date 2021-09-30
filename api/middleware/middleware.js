@@ -10,7 +10,7 @@ const validateUserId = async (req, res, next) => {
 		const { id } = req.params;
 		const user = await Users.getById(id);
 		if (!user) {
-			res.status(404).json(`User with id ${id} does not exist`);
+			res.status(404).json({ message:`user not found`});
 		} else {
 			req.user = user;
 			next();
